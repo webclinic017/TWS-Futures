@@ -1,0 +1,4 @@
+symbol,sectype,exchange,currency,multiplier,includeexpired
+N225,FUT,OSE.JPN,JPY,1000,True
+TOPX,FUT,OSE.JPN,JPY,10000,True
+JGB,FUT,OSE.JPN,JPY,1000000,True

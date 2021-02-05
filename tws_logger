@@ -1,0 +1,13 @@
+INFO:ibapi.client:sent startApi
+INFO:ibapi.client:REQUEST startApi {}
+INFO:ibapi.client:SENDING startApi b'\x00\x00\x00\t71\x002\x0010\x00\x00'
+INFO:ibapi.wrapper:ANSWER connectAck {}
+ERROR:ibapi.reader:unhandled exception in EReader thread
+Traceback (most recent call last):
+  File "/Users/mandeepsingh/dev/K2Q/projects/TWS-Futures/venv/lib/python3.9/site-packages/ibapi/reader.py", line 34, in run
+    data = self.conn.recvMsg()
+  File "/Users/mandeepsingh/dev/K2Q/projects/TWS-Futures/venv/lib/python3.9/site-packages/ibapi/connection.py", line 99, in recvMsg
+    buf = self._recvAllMsg()
+  File "/Users/mandeepsingh/dev/K2Q/projects/TWS-Futures/venv/lib/python3.9/site-packages/ibapi/connection.py", line 119, in _recvAllMsg
+    buf = self.socket.recv(4096)
+ConnectionResetError: [Errno 54] Connection reset by peer
