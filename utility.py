@@ -125,8 +125,8 @@ def working_day_calculation(start_date,end_date):
 def find_expiry(start_date,end_date,symbol):
     #start_date = datetime.datetime.strptime('20160311','%Y%m%d')
     #end_date = datetime.datetime.strptime('20200728','%Y%m%d')
-    day_name= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday']
-    future_expiry = pd.read_excel('future_contracts.xlsx')
+    day_name= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    future_expiry = pd.read_excel('future_contracts.xlsx', skiprows=1)
     future_list = future_expiry[symbol].to_list()
     last_count = 0
     count = 0

@@ -2,12 +2,15 @@ alive-progress==1.6.1
 attrs==20.3.0
 certifi==2020.12.5
 chardet==4.0.0
+et-xmlfile==1.0.1
 ibapi @ file:///Users/mandeepsingh/dev/K2Q/tools/twsapi_macunix.976.01/IBJts/source/pythonclient/dist/ibapi-9.76.1-py3-none-any.whl
 idna==2.10
 iniconfig==1.1.1
+jdcal==1.4.1
 numpy==1.19.4
+openpyxl==3.0.6
 packaging==20.9
-pandas==1.1.5
+pandas==1.2.1
 pluggy==0.13.1
 py==1.10.0
 pyparsing==2.4.7
@@ -18,5 +21,4 @@ requests==2.25.1
 six==1.15.0
 toml==0.10.2
 urllib3==1.26.2
-
-ibapi==9.76.1
+xlrd==2.0.1

@@ -207,7 +207,7 @@ class TestApp(EWrapper, EClient):
         if self.loaded_ticker.empty and (len(self.loaded_ticker) >= 10):
             for i in range(10):
                 tick, days, input_date, min_bar, input_record = self.df_pop()
-                print(tick,days,input_date,min_bar,input_record)
+                print('Input: ', tick, days, input_date, min_bar, input_record)
                 self.reqHistoricalData(tick, contract_object(input_record), str(input_date)+" 15:16:00", str(days)+" D",
                                        min_bar, "TRADES", 0,
                                        1, False, [])
@@ -279,9 +279,28 @@ class TestApp(EWrapper, EClient):
     #    file.write(str(reqId, bar.open, bar.high, bar.low, bar.close, bar.volume, bar.barCount, bar.average))
     #    file.write('\n')
 
+
 def main():
-    app = TestApp("127.0.0.1", 7497, 10, load_expiry_inputs('future_input.csv','20201125','1 D','1 min','N225'))
+    # r = load_expiry_inputs('future_input.csv',
+    #                        '20201125',
+    #                        '1 D',
+    #                        '1 min',
+    #                        'N225'
+    #                        )
+    # print(f'Res: {type(r)}')
+    # for i in r:
+    #     print(f'I: {i}\n-------------------------\n')
+    # exit()
+    app = TestApp("127.0.0.1",
+                  7497,
+                  10,
+                  load_expiry_inputs('future_input.csv',
+                                     '20201125',
+                                     '10 D',
+                                     '1 min',
+                                     'N225'))
     app.run()
+
 
 if __name__ == '__main__':
     main()
