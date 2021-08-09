@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import property as prop
 
+
 def load_data_to_csv(reqId, bar, vcount, fname):
     if vcount == 0 and (prop.file_exist == False):
         fname = 'historicaldatas'
@@ -31,7 +32,7 @@ def load_data_to_csv(reqId, bar, vcount, fname):
             file.write('\n')
 
 
-def no_historical_data(reqId,no_hist_count, fname):
+def no_historical_data(reqId, no_hist_count, fname):
     if no_hist_count == 0 and (not prop.hist_file_check):
         with open(str(fname)+'.csv', 'a') as file:
             if fname == 'nohistdata':
@@ -51,6 +52,7 @@ def no_historical_data(reqId,no_hist_count, fname):
             file.write(line)
             file.write('\n')
 
+
 def load_2nd_attempt_historical_data(flist):
     f_fail_list = pd.DataFrame(flist,columns=['ftickers'])
     f_fail_list.to_csv('tickers_after_2nd_attempt.csv',index=False)
@@ -63,6 +65,7 @@ def ticker_difference():
     original = original['Code'].to_list()
     diff = list(set(original)-set(processed))
     return diff, len(diff)
+
 
 def write_csv(p_stocks):
     processed_stocks = pd.DataFrame(p_stocks)
@@ -78,6 +81,7 @@ def session_req_no(bar):
     reqno = 1
     return session, reqno
 
+
 def load_datas_to_csv(reqId, bar):
     if reqId not in prop.reqlist:
         with open(str(reqId)+'.csv', 'a') as file:
@@ -92,24 +96,29 @@ def load_datas_to_csv(reqId, bar):
             file.write(line)
             file.write('\n')
 
+
 def tick_by_tick(time, stock_value, size):
     with open(str('tickbytick')+'.csv', 'a') as file:
             file.write(str(time)+','+str(stock_value)+','+str(size))
             file.write('\n')
 
+
 def calc_min_day(seconds):
     days = seconds/86400
     return days
+
 
 def do_round_up(check_day1, check_day2):
     if check_day1 != check_day2:
         check_day2 += 1
     return check_day2
 
+
 def date_finder(given_date,number_of_days):
-    given_d = datetime.datetime.strptime(given_date,'%Y%m%d')
+    given_d = datetime.datetime.strptime(given_date, '%Y%m%d')
     date2 = given_d - relativedelta(days = int(number_of_days))
     return date2.date()
+
 
 def working_day_calculation(start_date,end_date):
     start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
@@ -122,41 +131,6 @@ def working_day_calculation(start_date,end_date):
     else:
         return False
 
-def find_expiry(start_date,end_date,symbol):
-    #start_date = datetime.datetime.strptime('20160311','%Y%m%d')
-    #end_date = datetime.datetime.strptime('20200728','%Y%m%d')
-    day_name= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    future_expiry = pd.read_excel('future_contracts.xlsx', skiprows=1)
-    future_list = future_expiry[symbol].to_list()
-    last_count = 0
-    count = 0
-    expiries = []
-    for i in range(len(future_list)-1):
-        expiry_date = datetime.datetime.strptime(str(future_list[i]),'%Y%m%d')
-        start = np.where(expiry_date < start_date, 1, 2)
-        end = np.where(expiry_date > end_date, 1, 2)
-        if start == end:
-            count += 1
-            expiries.append(str(expiry_date.date()))
-        if not expiries:
-            if (end == 1) and (last_count == 0):
-                last_expiry_date_check = datetime.datetime.strptime(str(future_list[i]),'%Y%m%d')
-                last_expiry_date_before_check = datetime.datetime.strptime(str(future_list[i-1]),'%Y%m%d')
-                if (end_date < last_expiry_date_check) and (end_date > last_expiry_date_before_check):
-                    expiries.append(str(last_expiry_date_check.date()))
-        elif (end == 1) and (count > 1) and (last_count == 0):
-            last_expiry_date_check = datetime.datetime.strptime(str(future_list[i]),'%Y%m%d')
-            last_expiry_date_before_check = datetime.datetime.strptime(str(future_list[i-1]),'%Y%m%d')
-            if (end_date < last_expiry_date_check) and (end_date > last_expiry_date_before_check):
-                expiries.append(str(last_expiry_date_check.date()))
-            last_count += 1
-    if working_day_calculation(str(end_date.date()), expiries[-1]):
-        value = expiries[-1].replace('-','')
-        if len(future_list) != future_list.index(int(value)):
-            sub_string = str(future_list[future_list.index(int(value))+1])
-            sub_string = sub_string[:4]+'-'+sub_string[4:6]+'-'+sub_string[6:]
-            expiries.append(sub_string)
-    return expiries
 
 def end_date_constrains(start_date, end_date):
     start_start_date = datetime.datetime.strptime('20000309','%Y%m%d')
@@ -171,6 +145,7 @@ def end_date_constrains(start_date, end_date):
         print("WARNING: Start,End date durations are going beyond the start and end date's duration - 2000-03-09 to 2026-03-12")
     else:
         pass
+
 
 def calculate_days_of_first_expiry(start_date, end_date, o_date, check=None):
     final_check_date = 0
@@ -197,6 +172,7 @@ def calculate_days_of_first_expiry(start_date, end_date, o_date, check=None):
         result = int(np.busday_count(start_date.date(), end_date.date(), weekmask=[1,1,1,1,1,0,0], holidays=['2020-01-01']))
         return result,end_date.date()
 
+
 def generate_each_input(symbol, start_date, end_date, minbar,expiries):
     expiry_list = []
     for expiry in range(len(expiries)):
@@ -222,6 +198,7 @@ def generate_each_input(symbol, start_date, end_date, minbar,expiries):
             file.write(i)
             file.write('\n')
 
+
 def find_end_date_without_weekend(duration_value,input_date):
     import numpy as np
     with_weekdays = round(duration_value+((duration_value/7)*2))
@@ -231,8 +208,11 @@ def find_end_date_without_weekend(duration_value,input_date):
         start_date = date_finder(input_date, with_weekdays)
         #print(start_date)
         if 'start_date' not in f_result:
-            f_result['start_date'] =  start_date
-        result = int(np.busday_count(f_result['start_date'],np_input_date.date(),weekmask=[1,1,1,1,1,0,0],holidays=['2020-01-01']))
+            f_result['start_date'] = start_date
+        result = int(np.busday_count(f_result['start_date'],
+                                     np_input_date.date(),
+                                     weekmask=[1, 1, 1, 1, 1, 0, 0],
+                                     holidays=['2020-01-01']))
         if 'result' not in f_result:
             f_result['result'] = result
         if f_result['result'] >= duration_value:
@@ -241,7 +221,57 @@ def find_end_date_without_weekend(duration_value,input_date):
             f_result['result'] = result
             f_result['start_date'] = f_result['start_date'] - datetime.timedelta(days=1)
 
+
 def tick_by_tick(expiry,time, stock_value, size):
     with open(str('tickbytick')+'.csv', 'a') as file:
             file.write(str(expiry)+','+str(time)+','+str(stock_value)+','+str(size))
             file.write('\n')
+
+
+def find_expiry(start_date, end_date, symbol):
+    #start_date = datetime.datetime.strptime('20160311','%Y%m%d')
+    #end_date = datetime.datetime.strptime('20200728','%Y%m%d')
+    # day_name = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    future_expiry = pd.read_excel('future_contracts.xlsx', skiprows=1, engine='openpyxl')
+    future_list = future_expiry[symbol].to_list()
+    print(f'FL: {future_list}')
+    last_count = 0
+    count = 0
+    expiries = []
+    for i in range(len(future_list)-1):
+        expiry_date = datetime.datetime.strptime(str(future_list[i]), '%Y%m%d')
+        start = np.where(expiry_date < start_date, 1, 2)
+        end = np.where(expiry_date > end_date, 1, 2)
+        if start == end:
+            count += 1
+            expiries.append(str(expiry_date.date()))
+        if not expiries:
+            if (end == 1) and (last_count == 0):
+                last_expiry_date_check = datetime.datetime.strptime(str(future_list[i]),'%Y%m%d')
+                last_expiry_date_before_check = datetime.datetime.strptime(str(future_list[i-1]),'%Y%m%d')
+                if (end_date < last_expiry_date_check) and (end_date > last_expiry_date_before_check):
+                    expiries.append(str(last_expiry_date_check.date()))
+        elif (end == 1) and (count > 1) and (last_count == 0):
+            last_expiry_date_check = datetime.datetime.strptime(str(future_list[i]),'%Y%m%d')
+            last_expiry_date_before_check = datetime.datetime.strptime(str(future_list[i-1]),'%Y%m%d')
+            if (end_date < last_expiry_date_check) and (end_date > last_expiry_date_before_check):
+                expiries.append(str(last_expiry_date_check.date()))
+            last_count += 1
+    if working_day_calculation(str(end_date.date()), expiries[-1]):
+        value = expiries[-1].replace('-', '')
+        if len(future_list) != future_list.index(int(value)):
+            sub_string = str(future_list[future_list.index(int(value))+1])
+            sub_string = sub_string[:4]+'-'+sub_string[4:6]+'-'+sub_string[6:]
+            expiries.append(sub_string)
+    return expiries
+
+
+def _test():
+    s = datetime.datetime.strptime('2020-11-10', '%Y-%m-%d')
+    e = datetime.datetime.strptime('2020-11-25', '%Y-%m-%d')
+    ex = find_expiry(s, e, 'N225')
+    print(f'Ex: {ex}')
+
+
+if __name__ == '__main__':
+    _test()

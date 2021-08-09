@@ -1,4 +1,4 @@
-#!/Users/mandeepsingh/dev/K2Q/projects/TWS-Futures/venv/bin/python
+#!/Users/mandeepsingh/dev/k2q/projects/TWS-Futures/venv/bin/python
 # Copyright (c) 2005-2012 Stephen John Machin, Lingfo Pty Ltd
 # This script is part of the xlrd package, which is released under a
 # BSD-style licence.

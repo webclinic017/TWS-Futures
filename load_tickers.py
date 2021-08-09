@@ -1,14 +1,17 @@
 import os
-import pandas as pd
-import property as prop
 import time
 from utility import *
 
 
+def calc_min_day(seconds):
+    days = seconds/86400
+    return days
+
+
 def date_calculate_to_expiry(input_date, duration, minbar, symbol):
-    no_file_check = os.path.isfile('./expiries_input.csv')
+    no_file_check = os.path.isfile('expiries_input1.csv')
     if no_file_check:
-        os.remove('./expiries_input.csv')
+        os.remove('expiries_input1.csv')
     duration = duration.split()
     duration_value = int(duration[0])
     duration_period = duration[1]
@@ -17,9 +20,9 @@ def date_calculate_to_expiry(input_date, duration, minbar, symbol):
         l_days = int(f_days)
         days = do_round_up(f_days,l_days)
         if days > 28:
-            pass #need to handle months for inputs go beyond month
+            pass  # need to handle months for inputs go beyond month
     elif duration_period == 'D':
-        end_date = datetime.datetime.strptime(input_date,'%Y%m%d')
+        end_date = datetime.datetime.strptime(input_date, '%Y%m%d')
         _given_dates, start_date = find_end_date_without_weekend(duration_value, input_date)
         start_date = datetime.datetime.strptime(str(start_date),'%Y-%m-%d')
         end_date_constrains(start_date, end_date)
@@ -105,9 +108,9 @@ def load_expiry_inputs(fname, input_date, duration, minbar, symbol):
     print('Combining expiries with relevant contracts!!!')
     read_fut_contract = pd.read_csv(fname)
     read_expiry = pd.read_csv('expiries_input.csv')
-    expiry_output = read_expiry.merge(read_fut_contract,how='inner')
+    expiry_output = read_expiry.merge(read_fut_contract, how='inner')
     print('Input file feeding to API')
-    return ([symbol, '_', input_date, '_', duration,'ay_',minbar], expiry_output)
+    return [symbol, '_', input_date, '_', duration, 'ay_', minbar], expiry_output
 
 
 if __name__ == "__main__":
