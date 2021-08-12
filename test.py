@@ -284,7 +284,6 @@ class TestApp(EWrapper, EClient):
 
 
 def main():
-<<<<<<< HEAD
     from json import dumps
     expiry_input = load_expiry_inputs('future_input.csv','20210726','150 D','1 min',
                                       'N225')
@@ -298,7 +297,6 @@ def main():
     print('---------------------------------------------------------------------')
     return
     app = TestApp("127.0.0.1", 7497, 10, expiry_input)
-=======
     d = load_expiry_inputs('future_input.csv',
                            '20210621',
                            '10 D',
@@ -321,7 +319,6 @@ def main():
                                      '10 D',
                                      '1 min',
                                      'N225'))
->>>>>>> rough
     app.run()
 
 
