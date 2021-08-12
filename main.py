@@ -26,8 +26,8 @@ class TestApp(EWrapper, EClient):
         EClient.__init__(self, self)
         self.connect(host, port, clientId)
         print('API program starts now !!!')
-        self.check_loader = deepcopy(load_ticker)#[3841, 7426, 1795, 7175, 7559, 7689, 9355, 4875, 4621, 7435, 8208, 4496, 4497, 4624, 5395, 7446, 8729, 5918, 3490, 7460, 2986, 4781, 6065, 7857, 8885, 7351, 7873, 6599, 2761, 5962, 4685, 9679, 5969, 5971, 4052, 7891, 6998, 9049, 3802, 7515, 7901, 9311, 3424, 7265, 3171, 3686, 5355, 9967, 9073, 7413, 6518, 9976, 3578]
-        self.loaded_ticker = load_ticker #[3841, 7426, 1795, 7175, 7559, 7689, 9355, 4875, 4621, 7435, 8208, 4496, 4497, 4624, 5395, 7446, 8729, 5918, 3490, 7460, 2986, 4781, 6065, 7857, 8885, 7351, 7873, 6599, 2761, 5962, 4685, 9679, 5969, 5971, 4052, 7891, 6998, 9049, 3802, 7515, 7901, 9311, 3424, 7265, 3171, 3686, 5355, 9967, 9073, 7413, 6518, 9976, 3578]
+        self.check_loader = deepcopy(load_ticker)  # [3841, 7426, 1795]
+        self.loaded_ticker = load_ticker  # [3841, 7426, 1795]
         self.p_stocks = []
         self.diff_ip_address = False
         self.diff_ip_address_count = 0
@@ -51,16 +51,18 @@ class TestApp(EWrapper, EClient):
                 file.write('\n')
 
     def first_request(self):
+        print('first request...')
+        print(f'loaded tickers: {self.loaded_ticker}')
         if self.loaded_ticker and (len(self.loaded_ticker) >= 10):
             for i in range(10):
-                tick = int(self.loaded_ticker.pop())
+                tick = self.loaded_ticker.pop()
                 self.reqHistoricalData(tick, create_stock(tick), "20200810 15:30:00", "365 D",
                                        "1 min", "TRADES", 0,
                                        1, False, [])
             prop.hist_data_req_count += 10
         else:
             for i in range(len(self.loaded_ticker)):
-                tick = int(self.loaded_ticker.pop())
+                tick = self.loaded_ticker.pop()
                 self.reqHistoricalData(tick, create_stock(tick), "20200810 15:30:00", "365 D",
                                        "1 min", "TRADES", 0,
                                        1, False, [])
@@ -76,7 +78,7 @@ class TestApp(EWrapper, EClient):
     def second_request(self):
         if self.loaded_ticker:
             prop.hist_data_req_count += 1
-            tick = int(self.loaded_ticker.pop())
+            tick = self.loaded_ticker.pop()
             self.reqHistoricalData(tick, create_stock(tick), "20200810 15:30:00", "365 D",
                                    "1 min", "TRADES", 0,
                                    1, False, [])
@@ -114,13 +116,13 @@ class TestApp(EWrapper, EClient):
 
     def update_tickers_loaded_ticker(self):
         ticker_file = pd.read_csv('Tickers.csv')
-        all_tickers = ticker_file['Code'].to_list()
+        all_tickers = ticker_file['msymbol'].to_list()
         hist_file = pd.read_csv('historicaldatas.csv')
         hist_tickers = hist_file['ecode'].to_list()
         no_hist_tickers = pd.read_csv('nohistdata.csv')
-        no_hist_tickers =  no_hist_tickers['nohist'].to_list()
+        no_hist_tickers = no_hist_tickers['nohist'].to_list()
         if 'nohist' in no_hist_tickers:
-                del no_hist_tickers[0]
+            del no_hist_tickers[0]
         no_hist_tickers = (int(float(i)) for i in no_hist_tickers)
         processed_tickers = hist_tickers
         processed_tickers.sort()
@@ -177,7 +179,7 @@ class TestApp(EWrapper, EClient):
 
     def error(self, reqId, errorCode, errorString):
         print('Error: ', reqId, " ", errorCode, "Error String: ", errorString)
-        #prop.hist_data_req_count += 1
+        # prop.hist_data_req_count += 1
         if prop.hist_data_req_count < 40 and self.p_stocks:
             write_csv(self.p_stocks)
             self.p_stocks.clear()
@@ -269,8 +271,6 @@ class TestApp(EWrapper, EClient):
                 self.second_request()
             else:
                 print('exception not captured yet')
-                logging.warning(
-                    'Exception not yet captured for the request ID {} and ErrorString:{}'.format(reqId, errorString))
                 self.second_request()
 
         """if errorCode == 322:
@@ -303,7 +303,7 @@ class TestApp(EWrapper, EClient):
 
 
 def main():
-    # results = load_tickers('future_input.csv')
+    # load_tickers = load_tickers('future_input.csv')
     # print(f'Result Type: {type(results)}')
     # print(f'Results: {results}')
     # exit()

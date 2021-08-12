@@ -4,6 +4,7 @@ from ibapi.contract import Contract
 import os
 import pandas as pd
 
+
 def contract_object(expiry):
     contract = Contract()
     contract.symbol = 'N225'
@@ -15,6 +16,7 @@ def contract_object(expiry):
     contract.includeExpired = True
     return contract
 
+
 class TestApp(EWrapper, EClient):
     def __init__(self, host, port, clientId, expiry, date):
         EClient.__init__(self, self)
@@ -24,17 +26,30 @@ class TestApp(EWrapper, EClient):
         self.fut_request()
 
     def fut_request(self):
-        self.reqHistoricalTicks(1, contract_object(self.lexpiry),"", self.idate+" 05:31:00 JST", 1000, "TRADES", 1, True, [])
+        # self.reqHistoricalTicks(1, contract_object(self.lexpiry),"", self.idate+" 05:31:00 JST", 1000,
+        #                         "TRADES", 1, True, [])
+        self.reqHistoricalData(1,
+                               contract_object(self.lexpiry),
+                               "20200810 15:30:00",
+                               "20 D",
+                               "1 min",
+                                "TRADES", 0, 1, False, [])
+
     def error(self, reqId, errorCode, errorString):
         print('Error: ',reqId," ",errorCode,"Error String: ",errorString)
 
+    def historicalData(self, reqId, bar):
+        print(f'ID: {reqId} | Bar: {bar}')
+
     def historicalTicksLast(self, reqId, ticks, done):
-        from datetime import datetime
-        import pytz
-        for tick in ticks:
-            e_time = datetime.utcfromtimestamp(tick.time).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Asia/Tokyo'))
-            #print(datetime.utcfromtimestamp(tick.time).strftime('%Y-%m-%d %H:%M:%S'))
-            print("HistoricalTick. ReqId:", reqId,'Time', e_time.strftime("%Y-%m-%d %H:%M:%S"), 'Price', tick.price, 'Size', tick.size)
+        print(f'Tick: {reqId} | {done}')
+        print(f'Ticks: {ticks[0]}')
+        exit()
+        # from datetime import datetime
+        # import pytz
+        # for tick in ticks:
+        #     e_time = datetime.utcfromtimestamp(tick.time).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Asia/Tokyo'))
+        #     print("HistoricalTick. ReqId:", reqId,'Time', e_time.strftime("%Y-%m-%d %H:%M:%S"), 'Price', tick.price, 'Size', tick.size)
             #new_source['date'] = new_source['date'].dt.tz_localize("Asia/Dubai").dt.tz_convert('Asia/Tokyo').dt.tz_localize(None)
 
 def main():

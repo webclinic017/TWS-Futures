@@ -102,7 +102,7 @@ def generate_each_input(start_date, end_date, expiries):
             all_other = 112
             all_other_out = str(expiries[expiry])+','+str(expiries[expiry])+','+str(all_other)
             expiry_list.append(all_other_out)
-    with open('expiries_input.csv', 'a') as file:
+    with open('expiries_input1.csv', 'a') as file:
         line = "expiry,end_date,days"
         file.write(line)
         file.write('\n')

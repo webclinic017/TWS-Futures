@@ -3,16 +3,16 @@ from ibapi.client import EClient
 from ibapi.contract import Contract
 from datetime import datetime
 import pytz
-import math
+# import math
 from utility import no_historical_data, write_csv, session_req_no,load_datas_to_csv,tick_by_tick
-from logger import logging
+# from logger import logging
 import property as prop
-import time
+# import time
 from load_tickers import load_expiry_inputs
-import sys
+# import sys
 import pandas as pd
 from copy import deepcopy
-import numpy as np
+# import numpy as np
 import os
 
 
@@ -64,10 +64,11 @@ class TestApp(EWrapper, EClient):
         EClient.__init__(self, self)
         self.connect(host, port, clientId)
         print('API program starts now !!!')
+        print(f'Input: {inputs}')
         self.file_name, load_ticker = inputs
-        self.file_name = ''.join(map(str,self.file_name))
-        self.check_loader = deepcopy(load_ticker)#[3841, 7426, 1795, 7175, 7559, 7689, 9355, 4875, 4621, 7435, 8208, 4496, 4497, 4624, 5395, 7446, 8729, 5918, 3490, 7460, 2986, 4781, 6065, 7857, 8885, 7351, 7873, 6599, 2761, 5962, 4685, 9679, 5969, 5971, 4052, 7891, 6998, 9049, 3802, 7515, 7901, 9311, 3424, 7265, 3171, 3686, 5355, 9967, 9073, 7413, 6518, 9976, 3578]
-        self.loaded_ticker = load_ticker #[3841, 7426, 1795, 7175, 7559, 7689, 9355, 4875, 4621, 7435, 8208, 4496, 4497, 4624, 5395, 7446, 8729, 5918, 3490, 7460, 2986, 4781, 6065, 7857, 8885, 7351, 7873, 6599, 2761, 5962, 4685, 9679, 5969, 5971, 4052, 7891, 6998, 9049, 3802, 7515, 7901, 9311, 3424, 7265, 3171, 3686, 5355, 9967, 9073, 7413, 6518, 9976, 3578]
+        self.file_name = ''.join(map(str, self.file_name))
+        self.check_loader = deepcopy(load_ticker)  # [3841, 7426]
+        self.loaded_ticker = load_ticker  # [3841, 7426]
         self.p_stocks = []
         self.diff_ip_address = False
         self.diff_ip_address_count = 0
@@ -75,9 +76,8 @@ class TestApp(EWrapper, EClient):
         self.received_tickers = []
         self.file_write_count = 0
         self.csv_write_count = 0
-        self.req_res = [] #how many requested and received count balance
+        self.req_res = []  # how many requested and received count balance
         self.no_of_expiry = self.calculate_expiry_len()
-        #self.create_output_file()
         self.p_input = None
         self.reqCount = 0
         self.last_tick_update = 0
@@ -182,7 +182,7 @@ class TestApp(EWrapper, EClient):
         self.fut_request()
 
     def calculate_expiry_len(self):
-        expiry_f = pd.read_csv('expiries_input.csv')
+        expiry_f = pd.read_csv('expiries_input1.csv')
         return len(expiry_f.index)
 
     def do_combine_output_csv(self):
@@ -210,7 +210,7 @@ class TestApp(EWrapper, EClient):
         if self.loaded_ticker.empty and (len(self.loaded_ticker) >= 10):
             for i in range(10):
                 tick, days, input_date, min_bar, input_record = self.df_pop()
-                print(tick,days,input_date,min_bar,input_record)
+                print('Input: ', tick, days, input_date, min_bar, input_record, '\n\n---------\n\n')
                 self.reqHistoricalData(tick, contract_object(input_record), str(input_date)+" 15:16:00", str(days)+" D",
                                        min_bar, "TRADES", 0,
                                        1, False, [])
@@ -284,6 +284,7 @@ class TestApp(EWrapper, EClient):
 
 
 def main():
+<<<<<<< HEAD
     from json import dumps
     expiry_input = load_expiry_inputs('future_input.csv','20210726','150 D','1 min',
                                       'N225')
@@ -297,6 +298,30 @@ def main():
     print('---------------------------------------------------------------------')
     return
     app = TestApp("127.0.0.1", 7497, 10, expiry_input)
+=======
+    d = load_expiry_inputs('future_input.csv',
+                           '20210621',
+                           '10 D',
+                           '1 min',
+                           'N225')
+    print('xxxxxxxxxxxxxx}Generated input...')
+    print(f'Type: {len(d)}')
+    for i in d:
+        print(f'I.............: {i}')
+        print(i)
+        print('-------------------------------')
+        break
+    exit()
+
+    app = TestApp("127.0.0.1",
+                  7497,
+                  10,
+                  load_expiry_inputs('future_input.csv',
+                                     '20210218',
+                                     '10 D',
+                                     '1 min',
+                                     'N225'))
+>>>>>>> rough
     app.run()
 
 
