@@ -6,6 +6,7 @@
 logs/
 historical_data/
 .pytest_cache/
+venv/
 
 
 # Byte-compiled / optimized / DLL files
@@ -24,7 +25,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-#lib/
+lib/
 lib64/
 parts/
 sdist/
