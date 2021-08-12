@@ -1,5 +1,6 @@
 from os.path import isfile
 from datetime import datetime as dt
+from tws_futures.settings import CONTRACTS
 
 
 def _file_validator(file_path):
@@ -14,10 +15,11 @@ def _date_validator(target_date):
 
 
 def _duration_validator(duration):
-    value, unit = duration.split(' ')
-    units = ('D',)
-    assert value.isdigit(), f'Duration value must be a number: {duration}'
-    assert unit in units, f'Duration unit must be in: {units}'
+    # value, unit = duration.split(' ')
+    # units = ('D',)
+    # assert value.isdigit(), f'Duration value must be a number: {duration}'
+    # assert unit in units, f'Duration unit must be in: {units}'
+    assert isinstance(duration, int), f'Duration must be an integer'
 
 
 def _bar_validator(bar_size):
@@ -28,12 +30,11 @@ def _bar_validator(bar_size):
 
 
 def _symbol_validator(symbol):
-    supported_symbols = ('N225',)
+    supported_symbols = CONTRACTS.keys()
     assert symbol in supported_symbols, f'Symbol: {symbol} is not supported'
 
 
-VALIDATION_MAP = dict(file_path=_file_validator,
-                      target_date=_date_validator,
+VALIDATION_MAP = dict(symbol=_symbol_validator,
+                      date=_date_validator,
                       duration=_duration_validator,
-                      bar_size=_bar_validator,
-                      symbol=_symbol_validator)
+                      bar_size=_bar_validator)

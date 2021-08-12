@@ -1,1 +1,1 @@
-from tws_futures.helpers.input_loader import load_expiry_inputs
+from tws_futures.helpers.input_loader import generate_expiry_input
