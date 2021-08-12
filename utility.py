@@ -126,7 +126,8 @@ def find_expiry(start_date,end_date,symbol):
     #start_date = datetime.datetime.strptime('20160311','%Y%m%d')
     #end_date = datetime.datetime.strptime('20200728','%Y%m%d')
     day_name= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday']
-    future_expiry = pd.read_excel('future_contracts.xlsx')
+    p = '/Users/mandeepsingh/dev/k2q/projects/TWS-Futures/tws_futures/data_files/future_contracts/futures_expiry.csv'
+    future_expiry = pd.read_csv(p)
     future_list = future_expiry[symbol].to_list()
     last_count = 0
     count = 0

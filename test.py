@@ -15,6 +15,7 @@ from copy import deepcopy
 import numpy as np
 import os
 
+
 def contract_tick_object(expiry):
     contract = Contract()
     contract.symbol = 'N225'
@@ -25,6 +26,7 @@ def contract_tick_object(expiry):
     contract.lastTradeDateOrContractMonth = expiry
     contract.includeExpired = True
     return contract
+
 
 def contract_object(input_record):
     #symbol,sectype,exchange,currency,multiplier,localsymbol,conid,lasttradedateorcontractmonth,strike,right,primaryexchange,tradingclass,includeexpired,secidtype,secid
@@ -55,6 +57,7 @@ def contract_object(input_record):
     #contract.secId = input_record['secid'] if ('secid' in input_record.keys()) and (input_record['secid'] != 'nan') else ""
     #print(contract.secId)
     return contract
+
 
 class TestApp(EWrapper, EClient):
     def __init__(self, host, port, clientId, inputs):
@@ -279,9 +282,23 @@ class TestApp(EWrapper, EClient):
     #    file.write(str(reqId, bar.open, bar.high, bar.low, bar.close, bar.volume, bar.barCount, bar.average))
     #    file.write('\n')
 
+
 def main():
-    app = TestApp("127.0.0.1", 7497, 10, load_expiry_inputs('future_input.csv','20201125','1 D','1 min','N225'))
+    from json import dumps
+    expiry_input = load_expiry_inputs('future_input.csv','20210726','150 D','1 min',
+                                      'N225')
+    print('---------------------------------------------------------------------')
+    print(expiry_input)
+    print(len(expiry_input))
+    print('---------------------------------------------------------------------')
+    print(expiry_input[0])
+    print('---------------------------------------------------------------------')
+    print(dumps(expiry_input[1].T.to_dict(), indent=2))
+    print('---------------------------------------------------------------------')
+    return
+    app = TestApp("127.0.0.1", 7497, 10, expiry_input)
     app.run()
+
 
 if __name__ == '__main__':
     main()

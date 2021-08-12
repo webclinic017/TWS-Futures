@@ -1,0 +1,24 @@
+fut_contract_table1,,,,,,
+contract.symbol,contract.secType,contract.exchange,contract.currency,contract.multiplier,,Expiry
+N225,FUT,OSE.JPN,JPY,1000,,20200910
+TOPX,FUT,OSE.JPN,JPY,10000,,20200910
+JGB,FUT,OSE.JPN,JPY,1000000,,20200910
+NIY,FUT,GLOBEX,JPY,500,,20200910
+ES,FUT,GLOBEX,USD,50,,
+NQ,FUT,GLOBEX,USD,20,,
+,,,,,,
+AUL,,,,,,
+TN,,,,,,
+IBKNS,,,,,,
+US10YT,,,,,,
+US10YRT,,,,,,
+MQN,,,,,,
+USTEC,,,,,,
+DE30,,,,,,
+VIX,,,,,,
+VX,,,,,,
+USDJPY,,,,,,
+EUROJPY ,,,,,,
+EURO USD,,,,,,
+BTC-USD,,,,,,
+BTC,,,,,,
