@@ -143,6 +143,7 @@ def generate_expiry_input(symbol, end_date, duration, bar_size='1 min'):
                bar_size=bar_size)
     end_date = make_datetime(end_date)
     start_date = find_start_date(end_date, duration)
+    print(f'Start: {start_date} | End: {end_date}')
     all_expiries = get_expiries(symbol)
     validate_target_dates(start_date, end_date, all_expiries)
     target_expiries = find_target_expiries(start_date, end_date, all_expiries)
