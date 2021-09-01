@@ -23,20 +23,24 @@ class TestApp(EWrapper, EClient):
         self.connect(host, port, clientId)
         self.lexpiry = expiry
         self.idate = date
+        print(1)
         self.fut_request()
 
     def fut_request(self):
         # self.reqHistoricalTicks(1, contract_object(self.lexpiry),"", self.idate+" 05:31:00 JST", 1000,
         #                         "TRADES", 1, True, [])
+        print(2)
         self.reqHistoricalData(1,
                                contract_object(self.lexpiry),
                                "20200810 15:30:00",
                                "20 D",
                                "1 min",
                                 "TRADES", 0, 1, False, [])
+        print(3)
 
     def error(self, reqId, errorCode, errorString):
         print('Error: ',reqId," ",errorCode,"Error String: ",errorString)
+        # self.fut_request()
 
     def historicalData(self, reqId, bar):
         print(f'ID: {reqId} | Bar: {bar}')

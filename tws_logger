@@ -584,3 +584,46 @@ INFO:ibapi.client:REQUEST reqHistoricalTicks {'reqId': '20210311', 'contract': 1
 INFO:ibapi.client:SENDING reqHistoricalTicks b'\x00\x00\x00_96\x0020210311\x000\x00N225\x00FUT\x0020210311\x000.0\x00\x001000\x00OSE.JPN\x00\x00JPY\x00\x00\x001\x00\x0020201111 15:16:00\x001000\x00TRADES\x001\x001\x00\x00'
 >>>>>>> rough
 INFO:ibapi.client:detected KeyboardInterrupt, SystemExit
+INFO:ibapi.client:sent startApi
+INFO:ibapi.client:REQUEST startApi {}
+INFO:ibapi.client:SENDING startApi b'\x00\x00\x00\t71\x002\x0010\x00\x00'
+INFO:ibapi.wrapper:ANSWER connectAck {}
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'N225', 'contract': 140316195593424: 0,N225,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00N225\x000\x00N225\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.wrapper:ANSWER managedAccounts {'accountsList': 'DF201623,DU201624,DU201625,DU201626,DU201627,DU201628,'}
+INFO:ibapi.wrapper:ANSWER nextValidId {'orderId': 1}
+INFO:root:Data has been append to CSV, Append Count:0
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'JGB', 'contract': 140316195957200: 0,JGB,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00V20\x00JGB\x000\x00JGB\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'N225', 'contract': 140316195593424: 0,N225,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00N225\x000\x00N225\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'TOPX', 'contract': 140316195956816: 0,TOPX,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00TOPX\x000\x00TOPX\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'JGB', 'contract': 140316195957008: 0,JGB,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00V20\x00JGB\x000\x00JGB\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'N225', 'contract': 140316195956816: 0,N225,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00N225\x000\x00N225\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'TOPX', 'contract': 140316195593424: 0,TOPX,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00TOPX\x000\x00TOPX\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'JGB', 'contract': 140315912647056: 0,JGB,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00V20\x00JGB\x000\x00JGB\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'N225', 'contract': 140316195593424: 0,N225,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00N225\x000\x00N225\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'TOPX', 'contract': 140316195957200: 0,TOPX,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00TOPX\x000\x00TOPX\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'JGB', 'contract': 140315912649456: 0,JGB,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00V20\x00JGB\x000\x00JGB\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'N225', 'contract': 140316195957200: 0,N225,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00N225\x000\x00N225\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+INFO:ibapi.client:REQUEST reqHistoricalData {'reqId': 'TOPX', 'contract': 140316195956624: 0,TOPX,STK,,0.0,,,TSEJ,TSEJ,JPY,,,False,,combo:, 'endDateTime': '20200810 15:30:00', 'durationStr': '365 D', 'barSizeSetting': '1 min', 'whatToShow': 'TRADES', 'useRTH': 0, 'formatDate': 1, 'keepUpToDate': False, 'chartOptions': []}
+INFO:ibapi.client:SENDING reqHistoricalData b'\x00\x00\x00X20\x00TOPX\x000\x00TOPX\x00STK\x00\x000.0\x00\x00\x00TSEJ\x00TSEJ\x00JPY\x00\x00\x000\x0020200810 15:30:00\x001 min\x00365 D\x000\x00TRADES\x001\x000\x00\x00'
+ERROR:ibapi.reader:unhandled exception in EReader thread
+Traceback (most recent call last):
+  File "/Users/mandeepsingh/dev/k2q/projects/TWS-Futures/ibapi/reader.py", line 34, in run
+    data = self.conn.recvMsg()
+  File "/Users/mandeepsingh/dev/k2q/projects/TWS-Futures/ibapi/connection.py", line 99, in recvMsg
+    buf = self._recvAllMsg()
+  File "/Users/mandeepsingh/dev/k2q/projects/TWS-Futures/ibapi/connection.py", line 119, in _recvAllMsg
+    buf = self.socket.recv(4096)
+ConnectionResetError: [Errno 54] Connection reset by peer
+INFO:ibapi.client:detected KeyboardInterrupt, SystemExit

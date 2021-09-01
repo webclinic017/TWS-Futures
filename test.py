@@ -63,12 +63,20 @@ class TestApp(EWrapper, EClient):
     def __init__(self, host, port, clientId, inputs):
         EClient.__init__(self, self)
         self.connect(host, port, clientId)
-        print('API program starts now !!!')
-        print(f'Input: {inputs}')
+        # print('API program starts now !!!')
+        # print(f'Input: {inputs}')
+        # print('---------------')
+        # print(f'{inputs[0]}')
+        # print(f'T1: {type(inputs[0])}')
+        # print('---------------')
+        # print(inputs[1])
+        # print(f'T2: {type(inputs[1])}')
         self.file_name, load_ticker = inputs
         self.file_name = ''.join(map(str, self.file_name))
+        # print(f'File: {self.file_name}')
         self.check_loader = deepcopy(load_ticker)  # [3841, 7426]
         self.loaded_ticker = load_ticker  # [3841, 7426]
+        # print(f'Lt: {self.loaded_ticker}')
         self.p_stocks = []
         self.diff_ip_address = False
         self.diff_ip_address_count = 0
@@ -78,6 +86,7 @@ class TestApp(EWrapper, EClient):
         self.csv_write_count = 0
         self.req_res = []  # how many requested and received count balance
         self.no_of_expiry = self.calculate_expiry_len()
+        print(f'ELL: {self.no_of_expiry}')
         self.p_input = None
         self.reqCount = 0
         self.last_tick_update = 0
@@ -182,7 +191,7 @@ class TestApp(EWrapper, EClient):
         self.fut_request()
 
     def calculate_expiry_len(self):
-        expiry_f = pd.read_csv('expiries_input1.csv')
+        expiry_f = pd.read_csv('expiries_input.csv')
         return len(expiry_f.index)
 
     def do_combine_output_csv(self):
@@ -208,17 +217,31 @@ class TestApp(EWrapper, EClient):
 
     def first_request(self):
         if self.loaded_ticker.empty and (len(self.loaded_ticker) >= 10):
+            print(11111111111111111111111111)
             for i in range(10):
                 tick, days, input_date, min_bar, input_record = self.df_pop()
-                print('Input: ', tick, days, input_date, min_bar, input_record, '\n\n---------\n\n')
+                print('Request Input: ', tick, days, input_date, min_bar, input_record,
+                      '\n\n---------\n\n')
+                print('=================hhhhhhhhhhhhhhhhhhhhhhhhh==================')
+                # exit()
+                # exit()
                 self.reqHistoricalData(tick, contract_object(input_record), str(input_date)+" 15:16:00", str(days)+" D",
                                        min_bar, "TRADES", 0,
                                        1, False, [])
             prop.hist_data_req_count += 10
         else:
+            print(f'Else in first request: {len(self.loaded_ticker)}')
             for i in range(len(self.loaded_ticker)):
                 tick, days, input_date, min_bar, input_record = self.df_pop()
-                self.reqHistoricalData(tick, contract_object(input_record), str(input_date)+" 15:16:00", str(days)+" D",
+                print(f'Tick: {tick} | {type(tick)}')
+                print(f'IR: {input_record} | {type(input_record)}')
+                print(f'ID: {input_date} | {type(input_date)}')
+                print(f'MB: {min_bar} | {type(min_bar)}')
+                print('\n=================================\n')
+                # exit()
+                # exit()
+                self.reqHistoricalData(tick, contract_object(input_record),
+                                       str(input_date)+" 15:16:00", str(days)+" D",
                                        min_bar, "TRADES", 0,
                                        1, False, [])
                 prop.hist_data_req_count += 1
@@ -274,8 +297,9 @@ class TestApp(EWrapper, EClient):
             self.fut_request()
 
     def historicalData(self, reqId, bar):
-        print('HistoricalData', reqId, 'Date: ', bar.date, 'Open: ', bar.open, 'High: ', bar.high, 'Low: ', bar.low, 'Close: ', bar.close, 'Volume: ', bar.volume, 'Count: ', bar.barCount)
+        # print('HistoricalData', reqId, 'Date: ', bar.date, 'Open: ', bar.open, 'High: ', bar.high, 'Low: ', bar.low, 'Close: ', bar.close, 'Volume: ', bar.volume, 'Count: ', bar.barCount)
         #load_datas_to_csv(self.input_date, bar)
+        # print(f'HD: {reqId} | Bar: {bar}')
         load_datas_to_csv(reqId, bar)
 
     #with open('historicaldata.csv','wb') as file:
@@ -285,38 +309,38 @@ class TestApp(EWrapper, EClient):
 
 def main():
     from json import dumps
-    expiry_input = load_expiry_inputs('future_input.csv','20210726','150 D','1 min',
-                                      'N225')
-    print('---------------------------------------------------------------------')
-    print(expiry_input)
-    print(len(expiry_input))
-    print('---------------------------------------------------------------------')
-    print(expiry_input[0])
-    print('---------------------------------------------------------------------')
-    print(dumps(expiry_input[1].T.to_dict(), indent=2))
-    print('---------------------------------------------------------------------')
-    return
-    app = TestApp("127.0.0.1", 7497, 10, expiry_input)
-    d = load_expiry_inputs('future_input.csv',
-                           '20210621',
-                           '10 D',
-                           '1 min',
-                           'N225')
-    print('xxxxxxxxxxxxxx}Generated input...')
-    print(f'Type: {len(d)}')
-    for i in d:
-        print(f'I.............: {i}')
-        print(i)
-        print('-------------------------------')
-        break
-    exit()
-
+    print(f'==================== Old ====================')
+    # expiry_input = load_expiry_inputs('future_input.csv','20210726','150 D','1 min',
+    #                                   'N225')
+    # print('---------------------------------------------------------------------')
+    # # print(expiry_input)
+    # # print(len(expiry_input))
+    # # print('---------------------------------------------------------------------')
+    # print(expiry_input[0])
+    # print('---------------------------------------------------------------------')
+    # print(dumps(expiry_input[1].T.to_dict(), indent=2))
+    # print('---------------------------------------------------------------------')
+    # app = TestApp("127.0.0.1", 7497, 10, expiry_input)
+    # d = load_expiry_inputs('future_input.csv',
+    #                        '20210621',
+    #                        '10 D',
+    #                        '1 min',
+    #                        'N225')
+    # print('xxxxxxxxxxxxxx}Generated input...')
+    # print(f'Type: {len(d)}')
+    # for i in d:
+    #     print(f'I.............: {i}')
+    #     print(i)
+    #     print('-------------------------------')
+    #     break
+    # exit()
+    #
     app = TestApp("127.0.0.1",
                   7497,
                   10,
                   load_expiry_inputs('future_input.csv',
-                                     '20210218',
-                                     '10 D',
+                                     '20210823',
+                                     '1 D',
                                      '1 min',
                                      'N225'))
     app.run()

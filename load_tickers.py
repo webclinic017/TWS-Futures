@@ -25,6 +25,7 @@ def date_calculate_to_expiry(input_date, duration, minbar, symbol):
         end_date = datetime.datetime.strptime(input_date, '%Y%m%d')
         _given_dates, start_date = find_end_date_without_weekend(duration_value, input_date)
         start_date = datetime.datetime.strptime(str(start_date),'%Y-%m-%d')
+        print(f'Start: {start_date} | End: {end_date}')
         end_date_constrains(start_date, end_date)
         expiries = find_expiry(start_date, end_date, symbol)
         generate_each_input(symbol, start_date, end_date, minbar, expiries)
@@ -101,11 +102,10 @@ def load_tickers(fname):
 
 
 def load_expiry_inputs(fname, input_date, duration, minbar, symbol):
-    print('Generating Expiries!!!')
     date_calculate_to_expiry(input_date, duration, minbar, symbol)
-    print('Expiries Generated!!!')
-    print('')
-    print('Combining expiries with relevant contracts!!!')
+    # print('Expiries Generated!!!')
+    # print('')
+    # print('Combining expiries with relevant contracts!!!')
     read_fut_contract = pd.read_csv(fname)
     read_expiry = pd.read_csv('expiries_input.csv')
     expiry_output = read_expiry.merge(read_fut_contract, how='inner')

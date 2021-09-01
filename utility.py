@@ -239,16 +239,15 @@ def find_end_date_without_weekend(duration_value,input_date):
     import numpy as np
     with_weekdays = round(duration_value+((duration_value/7)*2))
     f_result = {}
+    start_date = date_finder(input_date, with_weekdays)
     while True:
         np_input_date = datetime.datetime.strptime(input_date,'%Y%m%d')
-        start_date = date_finder(input_date, with_weekdays)
-        #print(start_date)
         if 'start_date' not in f_result:
             f_result['start_date'] = start_date
         result = int(np.busday_count(f_result['start_date'],
                                      np_input_date.date(),
                                      weekmask=[1, 1, 1, 1, 1, 0, 0],
-                                     holidays=['2020-01-01']))
+                                     holidays=['2020']))
         if 'result' not in f_result:
             f_result['result'] = result
         if f_result['result'] >= duration_value:
@@ -271,7 +270,7 @@ def find_expiry(start_date, end_date, symbol):
     p = '/Users/mandeepsingh/dev/k2q/projects/TWS-Futures/tws_futures/data_files/future_contracts/futures_expiry.csv'
     future_expiry = pd.read_csv(p)
     future_list = future_expiry[symbol].to_list()
-    print(f'FL: {future_list}')
+    # print(f'FL: {future_list}')
     last_count = 0
     count = 0
     expiries = []
@@ -279,10 +278,10 @@ def find_expiry(start_date, end_date, symbol):
         expiry_date = datetime.datetime.strptime(str(future_list[i]), '%Y%m%d')
         start = np.where(expiry_date < start_date, 1, 2)
         end = np.where(expiry_date > end_date, 1, 2)
-        if start == end:
+        if start == end:  # expiry is in the middle
             count += 1
             expiries.append(str(expiry_date.date()))
-        if not expiries:
+        if not expiries:  # expiry list is empty
             if (end == 1) and (last_count == 0):
                 last_expiry_date_check = datetime.datetime.strptime(str(future_list[i]),'%Y%m%d')
                 last_expiry_date_before_check = datetime.datetime.strptime(str(future_list[i-1]),'%Y%m%d')

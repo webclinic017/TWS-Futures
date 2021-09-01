@@ -10,7 +10,10 @@ FUTURES_INPUT = join(DATA_FILES, 'futures_input.csv')
 FUTURES_EXPIRIES = join(DATA_FILES, 'future_contracts', 'futures_expiry.csv')
 
 # contracts
-_N225 = dict(symbol='N225', sectype='FUT', exchange='OSE.JPN',
-             currency='JPY', multiplier=1000, includeexpired=True)
+_N225 = dict(symbol='N225', security_type='FUT', exchange='OSE.JPN',
+             currency='JPY', multiplier=1000, include_expired=True)
 
-CONTRACTS = dict(N225=_N225)
+_TOPX = dict(symbol='TOPX', security_type='FUT', exchange='OSE.JPN',
+             currency='JPY', multiplier=10000, include_expired=True)
+
+CONTRACTS = dict(N225=_N225, TOPX=_TOPX)

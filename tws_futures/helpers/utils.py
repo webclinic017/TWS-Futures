@@ -23,4 +23,4 @@ def get_holidays(year='2021'):
 def get_business_days(start, end, weekends=False):
     return int(busday_count(start.date(), end.date(),
                             weekmask=get_weekmask(weekends),
-                            holidays=get_holidays(start.date().year)))
+                            holidays=[f'{start.year}']))
