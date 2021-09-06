@@ -6,6 +6,7 @@
 logs/
 historical_data/
 .pytest_cache/
+.cache/
 venv/
 rough
 
