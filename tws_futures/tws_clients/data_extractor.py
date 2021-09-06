@@ -207,7 +207,7 @@ class HistoricalDataExtractor(TWSWrapper, TWSClient):
             :param start: starting timestamp
             :param end: ending timestamp
         """
-        self.logger.critical(f'Data extraction completed for expiry: {expiry}')
+        self.logger.info(f'Data extraction completed for expiry: {expiry}')
         self.data['meta_data']['start'] = start
         self.data['meta_data']['end'] = end
         self.data['meta_data']['status'] = True

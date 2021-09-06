@@ -19,3 +19,6 @@ def parse_user_args():
     parser.add_argument('--duration', '-d', type=INPUT_TYPES['duration'],
                         default=1, dest='duration',
                         help='Number of days for which data is being requested.')
+    parser.add_argument('--debug', '-b', default=False, dest='debug', action='store_true',
+                        help='Use this to get detailed logs.')
+    return parser.parse_args()

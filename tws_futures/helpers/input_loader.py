@@ -6,10 +6,14 @@ from tws_futures.helpers.utils import find_date
 from tws_futures.helpers.utils import get_business_days
 from tws_futures.helpers.validators import VALIDATION_MAP
 from tws_futures.settings import *
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def generate_expiries_input(symbol, start_date, end_date, bar_size, expiries):
-    labels = ['symbol', 'lasttradedateorcontractmonth', 'end_date', 'days', 'minbar']
+    labels = ['symbol', 'expiry', 'end_date', 'duration', 'bar_size']
     data = []
     for i in range(len(expiries)):
         business_days = 83  # contract has a maturity period of ~65 days + two weeks of
@@ -39,6 +43,7 @@ def find_target_expiries(start_date, end_date, expiries):
     target_expiries = []
     for expiry in expiries:
         expiry = make_datetime(expiry)
+        # if expiry not in target_expiries:
         if expiry >= start_date:
             if expiry <= end_date:
                 target_expiries.append(expiry)
@@ -90,7 +95,7 @@ def get_expiries(symbol):
     return expiries[symbol].sort_values().astype(str).tolist()
 
 
-def generate_expiry_input(symbol, end_date, duration, bar_size='1 min'):
+def generate_expiry_input(symbol, end_date, duration=1, bar_size='1 min'):
     """
         :param end_date: end date --> %Y%m%d
         :param duration: number of days to go back from target date
@@ -102,7 +107,6 @@ def generate_expiry_input(symbol, end_date, duration, bar_size='1 min'):
                bar_size=bar_size)
     end_date = make_datetime(end_date)
     start_date = find_start_date(end_date, duration)
-    print(f'S: {start_date}')
     all_expiries = get_expiries(symbol)
     validate_target_dates(start_date, end_date, all_expiries)
     target_expiries = find_target_expiries(start_date, end_date, all_expiries)
@@ -110,11 +114,19 @@ def generate_expiry_input(symbol, end_date, duration, bar_size='1 min'):
                                    target_expiries)
 
 
+def load_expiry_input(end_date, duration=1):
+    logger.info('Generating expiry input')
+    expiry_input = []
+    for contract in CONTRACTS:
+        expiry_input.extend(generate_expiry_input(contract, end_date, duration))
+    return expiry_input
+
+
 def _test():
     # TODO: end date constraint
     from json import dumps
     expiry_input = generate_expiry_input(symbol='N225',
-                                         end_date='20210823',
+                                         end_date='20210901',
                                          duration=1,
                                          bar_size='1 min')
     print(dumps(expiry_input, indent=2))

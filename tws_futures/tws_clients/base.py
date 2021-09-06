@@ -27,7 +27,6 @@ def create_stock(symbol, security_type='STK', exchange='SMART', currency='JPY'):
 
 
 def create_futures_contract(expiry_input):
-    print('Generating........................')
     contract = Contract()
     """
         contract.symbol = 'N225'
@@ -43,9 +42,6 @@ def create_futures_contract(expiry_input):
     symbol, security_type, exchange = i['symbol'], i['security_type'], i['exchange']
     currency, multiplier, expiry = i['currency'], i['multiplier'], i['expiry']
     include_expired = i['include_expired']
-    print(f'SSSSSSSS: {symbol} | SEC: {security_type} | EX: {exchange} | CUR:'
-          f' {currency} | '
-          f'MUL: {multiplier} | EXP: {expiry} | IE: {include_expired}')
     contract.symbol = symbol
     contract.secType = security_type
     contract.exchange = exchange
