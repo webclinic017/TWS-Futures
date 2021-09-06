@@ -18,8 +18,7 @@ _N225 = dict(symbol='N225', security_type='FUT', exchange='OSE.JPN',
 _TOPX = dict(symbol='TOPX', security_type='FUT', exchange='OSE.JPN',
              currency='JPY', multiplier=10000, include_expired=True)
 _JGB = dict(symbol='JGB', security_type='FUT', exchange='OSE.JPN',
-             currency='JPY', multiplier=1000000, include_expired=True)
-JGB,FUT,OSE.JPN,JPY,1000000,165120001,20201012
+            currency='JPY', multiplier=1000000, include_expired=True)
 
 # month map, used to convert integer values to string for months
 MONTH_MAP = {

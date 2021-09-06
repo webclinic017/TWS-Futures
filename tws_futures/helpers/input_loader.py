@@ -114,11 +114,15 @@ def generate_expiry_input(symbol, end_date, duration=1, bar_size='1 min'):
                                    target_expiries)
 
 
-def load_expiry_input(end_date, duration=1):
+def load_expiry_input(symbol=None, end_date=None, duration=1):
     logger.info('Generating expiry input')
     expiry_input = []
-    for contract in CONTRACTS:
-        expiry_input.extend(generate_expiry_input(contract, end_date, duration))
+    if symbol and symbol in CONTRACTS:
+        expiry_input.extend(generate_expiry_input(symbol, end_date, duration))
+    else:
+        for contract in CONTRACTS:
+            expiry_input.extend(generate_expiry_input(contract, end_date, duration))
+    logger.debug(f'Expiry input: {expiry_input}')
     return expiry_input
 
 

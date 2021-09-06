@@ -158,7 +158,7 @@ class HistoricalDataExtractor(TWSWrapper, TWSClient):
 
     def run(self):
         """
-            Triggers the infinite message loop defined within parent class(EClient):
+            Triggers the message loop defined within parent class(EClient):
                 - Completes the initial handshake
                 - Triggers data extraction from error method
             Note: User must connect to TWS API prior to calling this method.

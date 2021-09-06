@@ -32,7 +32,7 @@ def cache(data):
 
 
 def extract_historical_data(expiry_input):
-    # logger.info(f'Running extractor, attempt: {run_counter} | max attempts: {max_attempts}')
+    # logger.info(f'Attempt: {run_counter} | max attempts: {max_attempts}')
     client = HistoricalDataExtractor()
     for i in expiry_input:
         client.extract_historical_data(i)
